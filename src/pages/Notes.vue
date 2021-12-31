@@ -1,17 +1,23 @@
 <template>
   <div class="container pt-5">
     <div class="card">
-      <h1>{{ title }}</h1>
+      <h1
+        :style="{
+          color: inputValue.length > 5 ? 'darkblue' : 'darkred',
+          fontSize: inputValue.length < 6 ? '2rem' : '1.5rem',
+        }"
+      >
+        {{ title }}
+      </h1>
       <div class="form-control">
         <input
           type="text"
           :placeholder="placeholderString"
-          :value="inputValue"
-          @input="inputChangeHandler"
+          v-model="inputValue"
           @keypress.enter="addNewNote"
         />
       </div>
-      <button class="btn" v-on:click="addNewNote">Add note</button>
+      <button class="btn" @click="addNewNote">Add note</button>
       <hr />
       <List :data="notes" v-if="notes.length !== 0" />
       <NoNotes v-else />
@@ -40,9 +46,6 @@ export default {
     };
   },
   methods: {
-    inputChangeHandler(event) {
-      this.inputValue = event.target.value;
-    },
     addNewNote() {
       if (this.inputValue !== "") {
         this.notes.push(this.inputValue);
