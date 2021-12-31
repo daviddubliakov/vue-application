@@ -7,24 +7,27 @@
           type="text"
           :placeholder="placeholderString"
           :value="inputValue"
-          v-on:input="inputChangeHandler"
-          v-on:keypress.enter="addNewNote"
+          @input="inputChangeHandler"
+          @keypress.enter="addNewNote"
         />
       </div>
       <button class="btn" v-on:click="addNewNote">Add note</button>
       <hr />
-      <List :data="notes" />
+      <List :data="notes" v-if="notes.length !== 0" />
+      <NoNotes v-else />
     </div>
   </div>
 </template>
 
 <script>
 import List from "../components/List.vue";
+import NoNotes from "../components/Placeholders/NoNotes.vue";
 
 export default {
   name: "Notes",
   components: {
     List,
+    NoNotes,
   },
   data() {
     return {
@@ -39,8 +42,10 @@ export default {
       this.inputValue = event.target.value;
     },
     addNewNote() {
-      this.notes.push(this.inputValue);
-      this.inputValue = "";
+      if (this.inputValue !== "") {
+        this.notes.push(this.inputValue);
+        this.inputValue = "";
+      }
     },
   },
 };

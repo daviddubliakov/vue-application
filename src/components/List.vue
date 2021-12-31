@@ -2,7 +2,7 @@
   <ul class="list">
     <li class="list-item" v-for="(item, index) in data" :key="index">
       {{ item }}
-      <button class="btn danger" v-on:click="deleteElement(index)">Delete</button>
+      <button class="btn danger" @click="deleteElement(index)">Delete</button>
     </li>
   </ul>
 </template>
