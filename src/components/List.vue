@@ -1,8 +1,12 @@
 <template>
   <ul class="list">
     <li class="list-item" v-for="(item, index) in data" :key="index">
-      {{ item }}
+      {{ index + 1 }}. {{ toUpperCase(item) }}
       <button class="btn danger" @click="deleteElement(index)">Delete</button>
+    </li>
+    <hr />
+    <li>
+      <strong>Overall quantity: {{ data.length }}</strong>
     </li>
   </ul>
 </template>
@@ -16,6 +20,9 @@ export default {
   methods: {
     deleteElement(elementIndex) {
       this.$props.data.splice(elementIndex, 1);
+    },
+    toUpperCase(text) {
+      return text.toUpperCase();
     },
   },
 };

@@ -15,6 +15,8 @@
       <hr />
       <List :data="notes" v-if="notes.length !== 0" />
       <NoNotes v-else />
+      <hr />
+      <strong>Doubled: {{ doubleNotesComputed }} </strong>
     </div>
   </div>
 </template>
@@ -34,7 +36,7 @@ export default {
       title: "Notes",
       inputValue: "",
       placeholderString: "Write a note title...",
-      notes: ["Note 1", "Note 2"],
+      notes: [],
     };
   },
   methods: {
@@ -44,6 +46,18 @@ export default {
     addNewNote() {
       if (this.inputValue !== "") {
         this.notes.push(this.inputValue);
+        this.inputValue = "";
+      }
+    },
+  },
+  computed: {
+    doubleNotesComputed() {
+      return this.notes.length * 2;
+    },
+  },
+  watch: {
+    inputValue(value) {
+      if (value.length > 10) {
         this.inputValue = "";
       }
     },
