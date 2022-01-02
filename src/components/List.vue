@@ -32,3 +32,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  transition: 0.22s all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.list-item:hover {
+  background: #eee;
+}
+</style>
